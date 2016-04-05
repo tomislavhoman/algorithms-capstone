@@ -13,12 +13,28 @@ import java.util.Scanner;
 import java.util.Set;
 
 public class GraphLoader {
+
     /**
-     * Loads graph with data from a file.
+     * Loads undirected graph with data from a file.
+     * The file should consist of lines with 2 integers each, corresponding
+     * to a "from" vertex and a "to" vertex. It is represented as directed graph with
+     * 2 directed edges for every edge
+     */
+    public static void loadUndirectedGraph(Graph g, String filename) {
+        loadGraph(g, filename, true);
+
+    }
+
+    /**
+     * Loads directed graph with data from a file.
      * The file should consist of lines with 2 integers each, corresponding
      * to a "from" vertex and a "to" vertex.
      */
-    public static void loadGraph(Graph g, String filename) {
+    public static void loadDirectedGraph(Graph g, String filename) {
+        loadGraph(g, filename, false);
+    }
+
+    private static void loadGraph(Graph g, String filename, boolean undirected) {
         Set<Integer> seen = new HashSet<>();
         Scanner sc;
         try {
@@ -41,6 +57,10 @@ public class GraphLoader {
                 seen.add(v2);
             }
             g.addEdge(v1, v2);
+
+            if (undirected) {
+                g.addEdge(v2, v1);
+            }
         }
 
         sc.close();

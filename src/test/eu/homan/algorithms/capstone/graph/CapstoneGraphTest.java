@@ -40,6 +40,11 @@ public class CapstoneGraphTest {
     @Test
     public void testTranspose() {
 
+        /*
+               +-----+
+               |     v
+            0->1->2->3
+         */
         final Graph graph = new CapstoneGraph();
         graph.addVertex(0);
         graph.addVertex(1);
@@ -50,6 +55,11 @@ public class CapstoneGraphTest {
         graph.addEdge(2, 3);
         graph.addEdge(1, 3);
 
+        /*
+               +-----+
+               v     |
+            0<-1<-2<-3
+         */
         final Graph transposedGraph = new CapstoneGraph();
         transposedGraph.addVertex(0);
         transposedGraph.addVertex(1);
