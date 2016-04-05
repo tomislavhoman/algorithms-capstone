@@ -36,7 +36,7 @@ public class DfsOrderingTest {
         expectedReversePostOrder.add(3);
         expectedReversePostOrder.add(4);
 
-        testOrdering(simpleGraph, 1, expectedPreOrder, expectedPostOrder, expectedReversePostOrder);
+        testOrdering(simpleGraph, expectedPreOrder, expectedPostOrder, expectedReversePostOrder);
     }
 
     @Test
@@ -62,7 +62,7 @@ public class DfsOrderingTest {
         expectedReversePostOrder.add(3);
         expectedReversePostOrder.add(4);
 
-        testOrdering(circularGraph, 1, expectedPreOrder, expectedPostOrder, expectedReversePostOrder);
+        testOrdering(circularGraph, expectedPreOrder, expectedPostOrder, expectedReversePostOrder);
     }
 
     @Test
@@ -71,42 +71,41 @@ public class DfsOrderingTest {
         GraphLoader.loadDirectedGraph(sccGraph, "./data/test_scc.txt");
 
         final Queue<Integer> expectedPreOrder = new LinkedList<>();
-        expectedPreOrder.add(7);
-        expectedPreOrder.add(4);
-        expectedPreOrder.add(3);
-        expectedPreOrder.add(6);
-        expectedPreOrder.add(5);
         expectedPreOrder.add(1);
         expectedPreOrder.add(2);
+        expectedPreOrder.add(3);
+        expectedPreOrder.add(4);
+        expectedPreOrder.add(7);
+        expectedPreOrder.add(5);
+        expectedPreOrder.add(6);
 
         final Queue<Integer> expectedPostOrder = new LinkedList<>();
-        expectedPostOrder.add(6);
-        expectedPostOrder.add(3);
-        expectedPostOrder.add(4);
         expectedPostOrder.add(1);
         expectedPostOrder.add(2);
         expectedPostOrder.add(5);
         expectedPostOrder.add(7);
+        expectedPostOrder.add(4);
+        expectedPostOrder.add(6);
+        expectedPostOrder.add(3);
 
         final Queue<Integer> expectedReversePostOrder = new LinkedList<>();
+        expectedReversePostOrder.add(3);
+        expectedReversePostOrder.add(6);
+        expectedReversePostOrder.add(4);
         expectedReversePostOrder.add(7);
         expectedReversePostOrder.add(5);
         expectedReversePostOrder.add(2);
         expectedReversePostOrder.add(1);
-        expectedReversePostOrder.add(4);
-        expectedReversePostOrder.add(3);
-        expectedReversePostOrder.add(6);
 
-        testOrdering(sccGraph, 7, expectedPreOrder, expectedPostOrder, expectedReversePostOrder);
+        testOrdering(sccGraph, expectedPreOrder, expectedPostOrder, expectedReversePostOrder);
     }
 
     private void testOrdering(final Graph<Integer> graph,
-                              final int s,
                               final Queue<Integer> expectedPreOrder,
                               final Queue<Integer> expectedPostOrder,
                               final Queue<Integer> expectedReversePostOrder) {
 
-        final DfsOrdering<Integer> dfsOrdering = new DfsOrdering<>(graph, s);
+        final DfsOrdering<Integer> dfsOrdering = new DfsOrdering<>(graph);
         final Iterable<Integer> preOrder = dfsOrdering.preOrder();
         final Iterable<Integer> postOrder = dfsOrdering.postOrder();
         final Iterable<Integer> reversePostOrder = dfsOrdering.reversePostOrder();
