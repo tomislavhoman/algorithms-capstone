@@ -1,11 +1,16 @@
 package eu.homan.algorithms.capstone.graph;
 
-import java.util.HashMap;
-import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Spliterator;
+import java.util.TreeMap;
+import java.util.function.Consumer;
 
 public final class CapstoneGraph<T> implements Graph<T> {
 
-    private final HashMap<T, HashSet<T>> graph = new HashMap<>();
+    private final Map<T, List<T>> graph = new TreeMap<>();
     private int v = 0;
     private int e = 0;
 
@@ -15,7 +20,7 @@ public final class CapstoneGraph<T> implements Graph<T> {
     @Override
     public void addVertex(final T vertex) {
         if (!graph.containsKey(vertex)) {
-            graph.put(vertex, new HashSet<>());
+            graph.put(vertex, new LinkedList<>());
             v++;
         }
     }
@@ -46,6 +51,14 @@ public final class CapstoneGraph<T> implements Graph<T> {
     @Override
     public int e() {
         return this.e;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    @Override
+    public Iterable<T> adj(final T v) {
+        return graph.get(v);
     }
 
     /**
@@ -98,5 +111,20 @@ public final class CapstoneGraph<T> implements Graph<T> {
                 ", v=" + v +
                 ", e=" + e +
                 '}';
+    }
+
+    @Override
+    public Iterator<T> iterator() {
+        return graph.keySet().iterator();
+    }
+
+    @Override
+    public void forEach(Consumer<? super T> action) {
+        graph.keySet().forEach(action::accept);
+    }
+
+    @Override
+    public Spliterator<T> spliterator() {
+        return null;
     }
 }

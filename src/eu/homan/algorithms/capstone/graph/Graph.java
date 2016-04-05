@@ -1,6 +1,6 @@
 package eu.homan.algorithms.capstone.graph;
 
-public interface Graph<T> {
+public interface Graph<T> extends Iterable<T> {
 
     /**
      * Creates a vertex with the given number. */
@@ -35,6 +35,14 @@ public interface Graph<T> {
      * @return number of edges
      */
     int e();
+
+    /**
+     * Returns neighbours of v
+     *
+     * @param v - Vertex whose neighbourhood we are interested in
+     * @return neighbours of v
+     */
+    Iterable<T> adj(T v);
 
     /**
      * Builds and returns the graph that is the same as original,

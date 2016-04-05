@@ -3,7 +3,7 @@ package test.eu.homan.algorithms.capstone.util;
 import eu.homan.algorithms.capstone.graph.CapstoneGraph;
 import eu.homan.algorithms.capstone.graph.Graph;
 import eu.homan.algorithms.capstone.util.GraphLoader;
-import junit.framework.Assert;
+import org.junit.Assert;
 import org.junit.Test;
 
 public class GraphLoaderTest {
