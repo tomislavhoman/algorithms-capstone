@@ -9,16 +9,16 @@ import org.junit.Test;
 
 public class DfsOrderingTest {
 
-    private Graph graph1;
-    private Graph graph2;
-    private Graph graph3;
+    private Graph<Integer> graph1;
+    private Graph<Integer> graph2;
+    private Graph<Integer> graph3;
 
     @Before
     public void setUp() {
 
-        graph1 = new CapstoneGraph();
-        graph2 = new CapstoneGraph();
-        graph3 = new CapstoneGraph();
+        graph1 = new CapstoneGraph<>();
+        graph2 = new CapstoneGraph<>();
+        graph3 = new CapstoneGraph<>();
 
         GraphLoader.loadDirectedGraph(graph1, "./data/test_simple.txt");
         GraphLoader.loadDirectedGraph(graph2, "./data/test_circular.txt");
@@ -26,7 +26,17 @@ public class DfsOrderingTest {
     }
 
     @Test
-    public void test1() {
-        Assert.assertTrue(true);
+    public void testSimple() {
+        Assert.assertTrue(false);
+    }
+
+    @Test
+    public void testCircular() {
+        Assert.assertTrue(false);
+    }
+
+    @Test
+    public void testScc() {
+        Assert.assertTrue(false);
     }
 }

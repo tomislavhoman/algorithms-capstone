@@ -3,9 +3,9 @@ package eu.homan.algorithms.capstone.graph;
 import java.util.HashMap;
 import java.util.HashSet;
 
-public final class CapstoneGraph implements Graph {
+public final class CapstoneGraph<T> implements Graph<T> {
 
-    private final HashMap<Integer, HashSet<Integer>> graph = new HashMap<>();
+    private final HashMap<T, HashSet<T>> graph = new HashMap<>();
     private int v = 0;
     private int e = 0;
 
@@ -13,7 +13,7 @@ public final class CapstoneGraph implements Graph {
      * @inheritDoc
      */
     @Override
-    public void addVertex(final int vertex) {
+    public void addVertex(final T vertex) {
         if (!graph.containsKey(vertex)) {
             graph.put(vertex, new HashSet<>());
             v++;
@@ -24,7 +24,7 @@ public final class CapstoneGraph implements Graph {
      * @inheritDoc
      */
     @Override
-    public void addEdge(final int vertex1, final int vertex2) {
+    public void addEdge(final T vertex1, final T vertex2) {
         checkVertex(vertex1);
         checkVertex(vertex2);
 
@@ -52,9 +52,9 @@ public final class CapstoneGraph implements Graph {
      * @inheritDoc
      */
     @Override
-    public Graph transpose() {
+    public Graph<T> transpose() {
 
-        final Graph transposedGraph = new CapstoneGraph();
+        final Graph<T> transposedGraph = new CapstoneGraph<>();
 
         graph.keySet().forEach(transposedGraph::addVertex);
 
@@ -64,9 +64,9 @@ public final class CapstoneGraph implements Graph {
         return transposedGraph;
     }
 
-    private void checkVertex(final int vertex) {
+    private void checkVertex(final T vertex) {
         if (!graph.containsKey(vertex)) {
-            throw new IllegalArgumentException(String.format("The graph does not contain vertex %d", vertex));
+            throw new IllegalArgumentException("The graph does not contain vertex");
         }
     }
 

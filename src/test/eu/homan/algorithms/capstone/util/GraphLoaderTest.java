@@ -11,8 +11,8 @@ public class GraphLoaderTest {
     @Test
     public void testLoadEdgesAndVertices() {
 
-        final Graph directedGraph = new CapstoneGraph();
-        final Graph undirectedGraph = new CapstoneGraph();
+        final Graph<Integer> directedGraph = new CapstoneGraph<>();
+        final Graph<Integer> undirectedGraph = new CapstoneGraph<>();
         GraphLoader.loadDirectedGraph(directedGraph, "./data/test_graph.txt");
         GraphLoader.loadUndirectedGraph(undirectedGraph, "./data/test_graph.txt");
 
@@ -26,7 +26,7 @@ public class GraphLoaderTest {
     @Test
     public void testLoadDirectedGraph() {
 
-        final Graph expectedGraph = new CapstoneGraph();
+        final Graph<Integer> expectedGraph = new CapstoneGraph<>();
         expectedGraph.addVertex(0);
         expectedGraph.addVertex(1);
         expectedGraph.addVertex(2);
@@ -41,7 +41,7 @@ public class GraphLoaderTest {
         expectedGraph.addEdge(5, 4);
         expectedGraph.addEdge(3, 3);
 
-        final Graph graph = new CapstoneGraph();
+        final Graph<Integer> graph = new CapstoneGraph<>();
         GraphLoader.loadDirectedGraph(graph, "./data/test_graph.txt");
 
         Assert.assertEquals(expectedGraph, graph);
@@ -50,7 +50,7 @@ public class GraphLoaderTest {
     @Test
     public void testLoadUndirectedGraph() {
 
-        final Graph expectedGraph = new CapstoneGraph();
+        final Graph<Integer> expectedGraph = new CapstoneGraph<>();
         expectedGraph.addVertex(0);
         expectedGraph.addVertex(1);
         expectedGraph.addVertex(2);
@@ -72,7 +72,7 @@ public class GraphLoaderTest {
         expectedGraph.addEdge(3, 3);
         expectedGraph.addEdge(3, 3);
 
-        final Graph graph = new CapstoneGraph();
+        final Graph<Integer> graph = new CapstoneGraph<>();
         GraphLoader.loadUndirectedGraph(graph, "./data/test_graph.txt");
 
         Assert.assertEquals(expectedGraph, graph);

@@ -1,6 +1,6 @@
 package eu.homan.algorithms.capstone.graph;
 
-public interface Graph {
+public interface Graph<T> {
 
     /**
      * Creates a vertex with the given number. */
@@ -10,7 +10,7 @@ public interface Graph {
      *
      * @param vertex - a vertex
      */
-    void addVertex(int vertex);
+    void addVertex(T vertex);
 
     /* Creates an edge from the first vertex to the second. */
 
@@ -20,7 +20,7 @@ public interface Graph {
      * @param vertex1 - from vertex
      * @param vertex2 - to vertex
      */
-    void addEdge(int vertex1, int vertex2);
+    void addEdge(T vertex1, T vertex2);
 
     /**
      * Returns number of vertices
@@ -42,5 +42,5 @@ public interface Graph {
      *
      * @return transposed graph
      */
-    Graph transpose();
+    Graph<T> transpose();
 }

@@ -2,6 +2,7 @@ package test.eu.homan.algorithms.capstone.graph;
 
 import eu.homan.algorithms.capstone.graph.CapstoneGraph;
 import eu.homan.algorithms.capstone.graph.Graph;
+import eu.homan.algorithms.capstone.util.GraphLoader;
 import junit.framework.Assert;
 import org.junit.Test;
 
@@ -12,7 +13,7 @@ public class CapstoneGraphTest {
     @Test
     public void testAddVertexAndEdge() {
 
-        final Graph graph = new CapstoneGraph();
+        final Graph<Integer> graph = new CapstoneGraph<>();
         Assert.assertEquals(0, graph.v());
         Assert.assertEquals(0, graph.e());
 
@@ -40,35 +41,18 @@ public class CapstoneGraphTest {
     @Test
     public void testTranspose() {
 
-        /*
-               +-----+
-               |     v
-            0->1->2->3
-         */
-        final Graph graph = new CapstoneGraph();
-        graph.addVertex(0);
-        graph.addVertex(1);
-        graph.addVertex(2);
-        graph.addVertex(3);
-        graph.addEdge(0, 1);
-        graph.addEdge(1, 2);
-        graph.addEdge(2, 3);
-        graph.addEdge(1, 3);
+        final Graph<Integer> graph = new CapstoneGraph<>();
+        GraphLoader.loadDirectedGraph(graph, "./data/test_simple.txt");
 
-        /*
-               +-----+
-               v     |
-            0<-1<-2<-3
-         */
-        final Graph transposedGraph = new CapstoneGraph();
-        transposedGraph.addVertex(0);
+        final Graph<Integer> transposedGraph = new CapstoneGraph<>();
         transposedGraph.addVertex(1);
         transposedGraph.addVertex(2);
         transposedGraph.addVertex(3);
-        transposedGraph.addEdge(1, 0);
+        transposedGraph.addVertex(4);
         transposedGraph.addEdge(2, 1);
         transposedGraph.addEdge(3, 2);
-        transposedGraph.addEdge(3, 1);
+        transposedGraph.addEdge(4, 3);
+        transposedGraph.addEdge(4, 2);
 
         Assert.assertEquals(transposedGraph, graph.transpose());
     }
