@@ -7,7 +7,7 @@ import java.util.Set;
 
 public final class GreedyMinimumDominantSet<T> implements MinimumDominantSet<T> {
 
-    private final Set<T> maximumDominantSet = new HashSet<>();
+    private final Set<T> minimumDominantSet = new HashSet<>();
 
     public GreedyMinimumDominantSet(final Graph<T> graph) {
 
@@ -19,15 +19,18 @@ public final class GreedyMinimumDominantSet<T> implements MinimumDominantSet<T> 
             if (nextDominant == null) {
                 return;
             }
-            maximumDominantSet.add(nextDominant);
+            minimumDominantSet.add(nextDominant);
             uncovered.remove(nextDominant);
             graph.adj(nextDominant).forEach(uncovered::remove);
         }
     }
 
+    /**
+     * @inheritDoc
+     */
     @Override
     public Set<T> get() {
-        return maximumDominantSet;
+        return minimumDominantSet;
     }
 
     private T maxCovering(final Set<T> uncovered, final Graph<T> graph) {

@@ -83,6 +83,9 @@ public final class CapstoneGraph<T> implements Graph<T> {
         }
     }
 
+    /**
+     * @inheritDoc
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -96,6 +99,9 @@ public final class CapstoneGraph<T> implements Graph<T> {
 
     }
 
+    /**
+     * @inheritDoc
+     */
     @Override
     public int hashCode() {
         int result = graph != null ? graph.hashCode() : 0;
@@ -104,6 +110,9 @@ public final class CapstoneGraph<T> implements Graph<T> {
         return result;
     }
 
+    /**
+     * @inheritDoc
+     */
     @Override
     public String toString() {
         return "CapstoneGraph{" +
@@ -113,16 +122,25 @@ public final class CapstoneGraph<T> implements Graph<T> {
                 '}';
     }
 
+    /**
+     * @inheritDoc
+     */
     @Override
     public Iterator<T> iterator() {
         return graph.keySet().iterator();
     }
 
+    /**
+     * @inheritDoc
+     */
     @Override
     public void forEach(Consumer<? super T> action) {
         graph.keySet().forEach(action::accept);
     }
 
+    /**
+     * @inheritDoc
+     */
     @Override
     public Spliterator<T> spliterator() {
         return null;
