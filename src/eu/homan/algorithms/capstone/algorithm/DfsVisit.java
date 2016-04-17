@@ -16,10 +16,22 @@ public final class DfsVisit<T> {
     public void start(final Consumer<? super T> beginProcessing,
                       final Consumer<? super T> doneProcessing) {
 
+        start(beginProcessing, doneProcessing, null);
+    }
+
+    public void start(final Consumer<? super T> beginProcessing,
+                      final Consumer<? super T> doneProcessing,
+                      final Consumer<Integer> newComponent) {
+
         final HashSet<T> visited = new HashSet<>();
 
+        final int[] component = {0};
         graph.forEach(v -> {
             if (!visited.contains(v)) {
+                component[0]++;
+                if (newComponent != null) {
+                    newComponent.accept(component[0]);
+                }
                 dfsVisit(graph, v, visited, beginProcessing, doneProcessing);
             }
         });

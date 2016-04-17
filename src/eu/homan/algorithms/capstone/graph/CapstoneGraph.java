@@ -41,6 +41,18 @@ public final class CapstoneGraph<T> implements Graph<T> {
      * @inheritDoc
      */
     @Override
+    public void removeEdge(T vertex1, T vertex2) {
+        checkVertex(vertex1);
+        checkVertex(vertex2);
+
+        graph.get(vertex1).remove(vertex2);
+        e--;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    @Override
     public int v() {
         return this.v;
     }
@@ -75,6 +87,21 @@ public final class CapstoneGraph<T> implements Graph<T> {
                 graph.get(v).forEach(neighbour -> transposedGraph.addEdge(neighbour, v)));
 
         return transposedGraph;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    @Override
+    public Graph<T> copy() {
+        final Graph<T> copy = new CapstoneGraph<>();
+
+        graph.keySet().forEach(copy::addVertex);
+
+        graph.keySet().forEach(v ->
+                graph.get(v).forEach(neighbour -> copy.addEdge(v, neighbour)));
+
+        return copy;
     }
 
     private void checkVertex(final T vertex) {

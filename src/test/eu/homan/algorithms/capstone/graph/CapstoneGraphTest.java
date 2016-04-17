@@ -40,6 +40,25 @@ public class CapstoneGraphTest {
     }
 
     @Test
+    public void testRemoveEdge() {
+
+        final Graph<Integer> graph = new CapstoneGraph<>();
+        GraphLoader.loadDirectedGraph(graph, "./data/test_simple.txt");
+        graph.removeEdge(2, 4);
+
+        final Graph<Integer> graphWithoutAnEdge = new CapstoneGraph<>();
+        graphWithoutAnEdge.addVertex(1);
+        graphWithoutAnEdge.addVertex(2);
+        graphWithoutAnEdge.addVertex(3);
+        graphWithoutAnEdge.addVertex(4);
+        graphWithoutAnEdge.addEdge(1, 2);
+        graphWithoutAnEdge.addEdge(2, 3);
+        graphWithoutAnEdge.addEdge(3, 4);
+
+        Assert.assertEquals(graphWithoutAnEdge, graph);
+    }
+
+    @Test
     public void testTranspose() {
 
         final Graph<Integer> graph = new CapstoneGraph<>();
@@ -56,6 +75,25 @@ public class CapstoneGraphTest {
         transposedGraph.addEdge(4, 3);
 
         Assert.assertEquals(transposedGraph, graph.transpose());
+    }
+
+    @Test
+    public void testCopy() {
+
+        final Graph<Integer> graph = new CapstoneGraph<>();
+        GraphLoader.loadDirectedGraph(graph, "./data/test_simple.txt");
+
+        final Graph<Integer> copiedGraph = new CapstoneGraph<>();
+        copiedGraph.addVertex(1);
+        copiedGraph.addVertex(2);
+        copiedGraph.addVertex(3);
+        copiedGraph.addVertex(4);
+        copiedGraph.addEdge(1, 2);
+        copiedGraph.addEdge(2, 3);
+        copiedGraph.addEdge(2, 4);
+        copiedGraph.addEdge(3, 4);
+
+        Assert.assertEquals(copiedGraph, graph.copy());
     }
 
     @Test

@@ -23,6 +23,14 @@ public interface Graph<T> extends Iterable<T> {
     void addEdge(T vertex1, T vertex2);
 
     /**
+     * Removes the edge, if it exists, from the first vertex to the second.
+     *
+     * @param vertex1 - from vertex
+     * @param vertex2 - to vertex
+     */
+    void removeEdge(T vertex1, T vertex2);
+
+    /**
      * Returns number of vertices
      *
      * @return number of vertices
@@ -51,4 +59,11 @@ public interface Graph<T> extends Iterable<T> {
      * @return transposed graph
      */
     Graph<T> transpose();
+
+    /**
+     * Builds the copy of the graph
+     *
+     * @return copy of the graph
+     */
+    Graph<T> copy();
 }
