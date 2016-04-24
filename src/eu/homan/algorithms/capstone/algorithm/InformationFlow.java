@@ -10,17 +10,23 @@ public final class InformationFlow<T> {
     private final Set<T> switched;
     private final Set<T> notSwitched;
     private final boolean hasReachedEquilibrium;
-
+    private final int numberOfSteps;
 
     public InformationFlow(Graph<T> graph, int a, int b, Set<T> sources) {
 
         final float threshold = (float) b / ((float) a + (float) b);
+        final int[] numberOfSteps = new int[]{0};
         this.switched = new HashSet<>();
-        this.hasReachedEquilibrium = cascadeNetwork(graph, threshold, sources, switched);
+        this.hasReachedEquilibrium = cascadeNetwork(graph, threshold, sources, switched, numberOfSteps);
         this.notSwitched = getNotSwitched(switched, graph);
+        this.numberOfSteps = numberOfSteps[0];
     }
 
-    private boolean cascadeNetwork(final Graph<T> graph, final float threshold, final Set<T> sources, final Set<T> switched) {
+    private boolean cascadeNetwork(final Graph<T> graph,
+                                   final float threshold,
+                                   final Set<T> sources,
+                                   final Set<T> switched,
+                                   int[] numberOfSteps) {
 
         for (T vertex : sources) {
             switched.add(vertex);
@@ -58,6 +64,8 @@ public final class InformationFlow<T> {
 
             currentIteration++;
         }
+
+        numberOfSteps[0] = currentIteration;
 
         return hasReachedEquilibrium;
     }
@@ -113,5 +121,9 @@ public final class InformationFlow<T> {
 
     public boolean reachedEquilibrium() {
         return hasReachedEquilibrium;
+    }
+
+    public int getNumberOfSteps() {
+        return numberOfSteps;
     }
 }
