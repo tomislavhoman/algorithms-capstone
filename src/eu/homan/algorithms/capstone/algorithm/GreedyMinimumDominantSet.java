@@ -14,6 +14,7 @@ public final class GreedyMinimumDominantSet<T> implements MinimumDominantSet<T> 
         final Set<T> uncovered = new HashSet<>();
         graph.forEach(uncovered::add);
 
+        // Greedily adding vertices that cover the most neighbour to the minimum dominant set
         while (!uncovered.isEmpty()) {
             final T nextDominant = maxCovering(uncovered, graph);
             if (nextDominant == null) {
@@ -35,12 +36,10 @@ public final class GreedyMinimumDominantSet<T> implements MinimumDominantSet<T> 
 
     private T maxCovering(final Set<T> uncovered, final Graph<T> graph) {
 
-        // Oh how much unnecessary work because of Java. Should be:
-        // int maxCoverage = 0;
-        // T currentDominant = null;
         final int[] maxCoverage = {0};
         final T[] currentDominant = (T[]) new Object[]{null};
 
+        // Finding the next vertex that can cover the most neighbours
         uncovered.forEach(v -> {
             final Set<T> uncoveredNeighbours = new HashSet<>();
             uncoveredNeighbours.add(v);

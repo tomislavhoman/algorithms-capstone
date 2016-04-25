@@ -38,8 +38,11 @@ public final class InformationFlow<T> {
         final int maxNumberOfIterations = graph.v() + 1;
         boolean hasReachedEquilibrium = false;
         int currentIteration = 0;
+
+        // Loop until reached equilibrium or hit the maximum number of iterations
         while (!hasReachedEquilibrium && currentIteration < maxNumberOfIterations) {
 
+            // Expand the candidates front
             fillNewCandidates(candidatesToSwitch, switched, graph);
 
             int numberOfSwitched = 0;
@@ -48,6 +51,8 @@ public final class InformationFlow<T> {
                 final boolean hasSwitched = trySwitchingTheCandidate(candidate, switched, graph, threshold);
                 if (hasSwitched) {
                     numberOfSwitched++;
+
+                    // Cannot remove immediately from candidatesToSwitch
                     switchedInThisIteration.add(candidate);
                 }
             }
@@ -70,6 +75,7 @@ public final class InformationFlow<T> {
         return hasReachedEquilibrium;
     }
 
+    // Implementation of the formula given in the lectures
     private boolean trySwitchingTheCandidate(final T candidate, final Set<T> switched, final Graph<T> graph, final float threshold) {
 
         int d = 0;
@@ -89,6 +95,7 @@ public final class InformationFlow<T> {
         return false;
     }
 
+    // Just add the neighbours of the currently switched front to the candidates
     private void fillNewCandidates(final Set<T> candidatesToSwitch, final Set<T> switched, final Graph<T> graph) {
 
         for (T vertex : switched) {
@@ -111,18 +118,38 @@ public final class InformationFlow<T> {
         return notSwitched;
     }
 
+    /**
+     * Returns the set of vertices that have switched
+     *
+     * @return switched
+     */
     public Set<T> switched() {
         return switched;
     }
 
+    /**
+     * Returns the set of vertices that haven't switched
+     *
+     * @return notSwitched
+     */
     public Set<T> notSwitched() {
         return notSwitched;
     }
 
+    /**
+     * Returns the flag indicating the network has reached the equilibrium
+     *
+     * @return hasReachedEquilibrium
+     */
     public boolean reachedEquilibrium() {
         return hasReachedEquilibrium;
     }
 
+    /**
+     * Returns number of steps the algorithm took to reach the equilibrium
+     *
+     * @return numberOfSteps
+     */
     public int getNumberOfSteps() {
         return numberOfSteps;
     }
